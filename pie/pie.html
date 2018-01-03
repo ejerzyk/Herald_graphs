@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<html lang="en-US">
+  <head>
+  	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.css">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+  	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.js"></script>
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>
+    <title> [TITLE] </title>
+    <style>
+    .arc text {
+      font: 10px sans-serif;
+      text-anchor: middle;
+    }
+    .arc path {
+      stroke: #fff;
+    }
+    h1, h5, div {
+    	margin: 10px;
+    }
+    </style>
+  </head>
+  <body>
+  <h1>Title of chart</h1>
+  <h5>Subtitle</h5>
+  <div class="chart"></div>
+
+<script type="text/javascript">
+	// FILL THIS IN
+	var slice_names = ['category_one', 'category_two', 'category_three', 'category_four'];
+
+	var slice_colors = ["#E32636", "#5D8AA8" , "#8DB600", "#FF9966", "#FFBF00" , "#E52B50" , "#4B5320", "#007FFF" , "#DE5D83" , "#FFD12A" , "#98777B" , "#B5A642" , "#FF007F" , "#08E8DE" , "#D19FE8" , "#004225" , "#CC0000" , "#702963" , "	#ED872D" , "#536878" , "#E30022" , "#006B3C" , "#00CC99" , "#FFEF00" , "#A3C1AD" , "#ED9121" , "#2A52BE" , "#ACE1AF" , "#36454F" , "#DFFF00" , "#DE3163", "#FFA700" , "#98817B" , "#00FF6F" , "#CD5C5C", "#7B3F00" , "#E34234" , "#D2691E" , "#FBCCE7", "#E4D00A" , "#0047AB" , "#FF3800" , "#8C92AC", "#FBEC5D" , "#FF7F50" , "#893F45" , "#654321" , "#A40000" , "#08457E" , "#008B8B"];
+
+	var chart_width = 1000;
+	var chart_height = 600;
+	var radius = Math.min(chart_width, chart_height) / 2;
+
+	var svg = d3.select("div.chart")
+				.append("svg")
+				.attr("width", chart_width)
+				.attr("height", chart_height)
+				.attr("id", "barchart");
+	var g = svg.append("g").attr("transform", "translate(" + chart_width / 2 + "," + chart_height / 2 + ")");
+
+	var pie = d3.layout.pie()
+	    .sort(null)
+	    .value(function(d) { return d.data; });
+	var path = d3.svg.arc()
+	    .outerRadius(radius - 10)
+	    .innerRadius(0);
+	var label = d3.svg.arc()
+	    .outerRadius(radius - 40)
+	    .innerRadius(radius - 40);
+	
+
+	d3.csv("data.csv", function(d) {
+	  d.data = +d.data;
+	  return d;
+	}, function(error, data) {
+	  if (error) throw error;
+
+	  var arc = g.selectAll(".arc")
+	    .data(pie(data))
+	    .enter().append("g")
+	      .attr("class", "arc");
+
+	  arc.append("path")
+	      .attr("d", path)
+	      .attr("fill", function(d, i) { return slice_colors[i]; })
+	      .append("title")
+	      .text(function(d) {
+	      	return d.data.categories + ": " + d.data.data;
+	      });
+	});
+
+</script>
+
+  </body>
+</html>
