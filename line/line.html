@@ -15,7 +15,7 @@
     	fill: none;
     	stroke: steelblue;
     }
-    h1, h5, div {
+    h1, h5, div, p {
     	margin: 10px;
     }
     </style>
@@ -24,8 +24,12 @@
   <h1>Title of chart</h1>
   <h5>Subtitle</h5>
   <div class="chart"></div>
+  <p><i>Source: This is the source</i></p>
 
 <script type="text/javascript">
+	// FILL THIS IN 
+	var x_axis_values = [0,1,2,3,4,5,6,7,8,9,10];
+	
 	var line_colors = ["#E32636", "#5D8AA8" , "#8DB600	", "#FF9966", "#FFBF00" , "#E52B50" , "#4B5320", "#007FFF" , "#DE5D83" , "#FFD12A" , "#98777B" , "#B5A642" , "#FF007F" , "#08E8DE" , "#D19FE8" , "#004225" , "#CC0000" , "#702963" , "	#ED872D" , "#536878" , "#E30022" , "#006B3C" , "#00CC99" , "#FFEF00" , "#A3C1AD" , "#ED9121" , "#2A52BE" , "#ACE1AF" , "#36454F" , "#DFFF00" , "#DE3163", "#FFA700" , "#98817B" , "#00FF6F" , "#CD5C5C", "#7B3F00" , "#E34234" , "#D2691E" , "#FBCCE7", "#E4D00A" , "#0047AB" , "#FF3800" , "#8C92AC", "#FBEC5D" , "#FF7F50" , "#893F45" , "#654321" , "#A40000" , "#08457E" , "#008B8B"];
 	
 	var chart;
@@ -48,9 +52,6 @@
 		bottom: 20,
 		left: 50
 	};
-
-	  // FILL THIS IN 
-	var x_axis_values = [0,1,2,3,4,5,6,7,8,9,10];
 
 	d3.csv("data.csv" , function(all) {
 		var mv = 0; 
