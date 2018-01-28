@@ -67,10 +67,14 @@
 		var barchart_width = 1000;
 		var multiplier = (barchart_width - margin.right - margin.left - left_start) / max_value
 
+		var browser_width = window.innerWidth;
+		var browser_height = window.innerHeight;
+
 		var svg_one = d3.select("div.chart")
 					.append("svg")
-					.attr("width", barchart_width)
-					.attr("height", barchart_height)
+					.attr("width", browser_width)
+					.attr("height", browser_height-200)
+					.attr("viewBox","0 0 " + barchart_width + " " + barchart_height)
 					.attr("id", "barchart");
 
 		var d = svg_one.selectAll("rect")

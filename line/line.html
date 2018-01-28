@@ -40,10 +40,15 @@
 	var chart;
 	var chart_width = 1000;
 	var chart_height = 600;
+
+	var browser_width = window.innerWidth;
+	var browser_height = window.innerHeight;
+
 	chart = d3.select("div.chart")
 		.append("svg")
-		.attr("width" , chart_width)
-		.attr("height" , chart_height)
+		.attr("width" , browser_width)
+		.attr("height" , browser_height-200)
+		.attr("viewBox","0 0 " + chart_width + " " + chart_height)
 		.attr("id","chart");
 	var legend = chart.append("g")
 	  .attr("class", "legend")

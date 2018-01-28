@@ -43,10 +43,14 @@
 	var chart_height = 600;
 	var radius = Math.min(chart_width, chart_height) / 2;
 
+	var browser_width = window.innerWidth;
+	var browser_height = window.innerHeight;
+
 	var svg = d3.select("div.chart")
 				.append("svg")
-				.attr("width", chart_width)
-				.attr("height", chart_height)
+				.attr("width", browser_width)
+				.attr("height", browser_height-200)
+				.attr("viewBox","0 0 " + chart_width + " " + chart_height)
 				.attr("id", "barchart");
 	var g = svg.append("g").attr("transform", "translate(" + chart_width / 2 + "," + chart_height / 2 + ")");
 
